@@ -33,11 +33,18 @@ class NetworkManager:
                             'Mode': str(sub_interface['Mode'])
                         }
                     if sub_path == 'net.connman.iwd.Station':
-                        connected_network = str(sub_interface['ConnectedNetwork'])
-                        adapter_info['status'] = {
-                            'State': str(sub_interface['State']),
-                            'Network': str(objects[connected_network]['net.connman.iwd.Network']['Name']),
-                        }
+                        if 'ConnectedNetwork' in sub_interface:
+                            connected_network = str(sub_interface['ConnectedNetwork'])
+                            adapter_info['status'] = {
+                                'State': str(sub_interface['State']),
+                                'Network': str(objects[connected_network]['net.connman.iwd.Network']['Name']),
+                            }
+                        else:
+                            adapter_info['status'] = {
+                                'State': str(sub_interface['State']),
+                                'Network': None,
+                            }
+
                 self.adapters_path.append(adapter_path)
                 self.info.append(adapter_info)
     

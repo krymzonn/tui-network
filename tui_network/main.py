@@ -116,5 +116,6 @@ class NetworkApp(App):
     def action_toggle(self, up: bool):
         nm.toggle(up)
 
-app = NetworkApp()
-app.run()
+def network_app():
+    app = NetworkApp()
+    app.run()
