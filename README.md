@@ -38,6 +38,10 @@ You can change the theme by hitting `ctrl+p`. A sneak peek at some of them:
 - `ctrl+d` to power down the wifi
 - `ctrl+r` to refresh the page
 
+## Dependencies
+
+You need to have `iwd` as your network backend. Visit the [official Debian documentation](https://wiki.debian.org/NetworkManager/iwd) for more details.
+
 ## Install
 
 ```
