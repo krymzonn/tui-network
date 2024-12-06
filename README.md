@@ -2,7 +2,7 @@
 
 # tui-network
 
-`tui-network` is a Python based TUI for managing the wifi on Linux built with [Textual](https://github.com/Textualize/textual).
+`tui-network` is a Python based TUI for managing the wifi on Linux built with [Textual](https://github.com/Textualize/textual) and [dbus-python](https://dbus.freedesktop.org/doc/dbus-python/).
 
 ## Rationale
 
