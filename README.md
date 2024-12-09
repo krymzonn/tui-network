@@ -29,8 +29,8 @@ You can change the theme by hitting `ctrl+p`. A sneak peek at some of them:
 - `ctrl+r` to rescan and refresh the page
 
 ### Toggle the wifi power
-- `ctrl+1` to power up the wifi
-- `ctrl+2` to power down the wifi
+- `ctrl+1` to power down the wifi
+- `ctrl+2` to power up the wifi
 - `ctrl+r` to rescan and refresh the page
 
 ## Dependencies
