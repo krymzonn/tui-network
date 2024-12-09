@@ -1,0 +1,74 @@
+Container {
+    layout: grid;
+    grid-size: 2 4;
+    grid-rows: 1fr;
+    grid-columns: 1fr;
+    grid-gutter: 1 3;
+    margin: 1;
+}
+
+#networks {
+    row-span: 4;
+    column-span: 1;
+}
+
+NetworksWidget {
+    height: 100h;
+    border: grey;
+}
+
+NetworksWidget:focus-within {
+    border: heavy $accent;
+}
+
+#status {
+    row-span: 2;
+    column-span: 1;
+}
+
+StatusWidget {
+    height: 100h;
+    border: grey;
+}
+
+StatusWidget:focus-within {
+    border: heavy $accent;
+}
+
+#connect {
+    row-span: 1;
+    column-span: 1;
+}
+
+ConnectWidget {
+    padding: 1;
+    height: 100h;
+    border: grey;
+}
+
+ConnectWidget:focus-within {
+    border: heavy $accent;
+}
+
+#fortune {
+    row-span: 1;
+    column-span: 1;
+}
+
+FortuneWidget {
+    padding: 1;
+    height: 100h;
+    border: grey;
+}
+
+FortuneWidget:focus-within {
+    border: heavy $accent;
+}
+
+DataTable {
+    margin: 1;
+}
+
+Input {
+    width: 50w;
+}

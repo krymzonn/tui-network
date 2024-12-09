@@ -1,29 +1,12 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, DataTable, Input
+from textual.widgets import Footer, DataTable, Input, RichLog
 from textual.containers import Container, VerticalGroup, VerticalScroll, HorizontalGroup
 from tui_network.features.network_manager.network_manager import NetworkManager
-
+from fortune import fortune
 
 nm = NetworkManager()
 
-class DevicesWidget(VerticalGroup):
-
-    BORDER_TITLE = "Devices"
-
-    def compose(self) -> ComposeResult:
-        yield DataTable(
-            header_height=2,
-            show_cursor=False,
-            cursor_type='row'
-        )
-
-    def on_mount(self) -> None:
-        table = self.query_one(DataTable)
-        devices = nm.get_devices()
-        table.add_columns(*devices[0].keys())
-        table.add_rows([x.values() for x in devices])
-
-class StatusWidget(VerticalGroup):
+class StatusWidget(VerticalScroll):
 
     BORDER_TITLE = "Status"
 
@@ -36,16 +19,15 @@ class StatusWidget(VerticalGroup):
 
     def on_mount(self) -> None:
         table = self.query_one(DataTable)
-        status = nm.get_status()
         try:
-            table.add_columns(*status[0].keys())
-            table.add_rows([x.values() for x in status])
+            table.add_columns(*nm.get_status_header())
+            table.add_rows(nm.get_status())
         except:
             print('Wireless is down...')
 
-class AvailableNetworksWidget(VerticalScroll):
+class NetworksWidget(VerticalScroll):
 
-    BORDER_TITLE = "Available networks"
+    BORDER_TITLE = "Networks"
 
     def compose(self) -> ComposeResult:
         yield DataTable(
@@ -55,10 +37,9 @@ class AvailableNetworksWidget(VerticalScroll):
 
     def on_mount(self) -> None:
         table = self.query_one(DataTable)
-        networks = nm.get_networks()
         try:
-            table.add_columns(*networks[0].keys())
-            table.add_rows([x.values() for x in networks])
+            table.add_columns(*nm.get_networks_header())
+            table.add_rows(nm.get_networks())
         except:
             print('Wireless is down...')
 
@@ -82,40 +63,45 @@ class ConnectWidget(HorizontalGroup):
             network_passphrase = message.value
             nm.connect(network_name, network_passphrase)
 
+class FortuneWidget(VerticalScroll):
+
+    BORDER_TITLE = "Fortune"
+
+    def compose(self) -> ComposeResult:
+        yield RichLog(wrap=True)
+
+    def on_mount(self):
+        log = self.query_one(RichLog)
+        log.write(fortune())
+
+
 class NetworkApp(App):
 
     BORDER_TITLE = "Network app"
-    CSS_PATH = "assets/NetworkApp.tcss"
+    CSS_PATH = "static/style.tcss"
 
     BINDINGS = [
-        ("ctrl+s", "scan()", "Scan"),  
         ("ctrl+r", "refresh()", "Refresh"),
-        ("ctrl+u", "toggle(True)", "Wireless up"),
-        ("ctrl+d", "toggle(False)", "Wireless down"),
+        ("ctrl+1", "toggle('off')", "Wifi down"),
+        ("ctrl+2", "toggle('on')", "Wifi up"),
     ]
 
     def compose(self) -> ComposeResult:
         yield Container(
-            VerticalGroup(AvailableNetworksWidget(), id='p1'),
-            VerticalGroup(DevicesWidget(), id='p2'),
-            VerticalGroup(StatusWidget(), id='p3'),
-            VerticalGroup(ConnectWidget(), id='p4'),
+            VerticalGroup(NetworksWidget(can_focus=False), id='networks'),
+            VerticalGroup(StatusWidget(can_focus=False, can_focus_children=False), id='status'),
+            VerticalGroup(ConnectWidget(), id='connect'),
+            VerticalGroup(FortuneWidget(can_focus=False, can_focus_children=False), id='fortune')
         )
         yield Footer()
 
-    def action_scan(self) -> None:
-        nm.scan()
-
     def action_refresh(self) -> None:
-        nm.update_info()
+        nm.rescan()
         self.refresh(recompose=True)
 
-    def action_disconnect(self) -> None:
-        nm.disconnect()
+    def action_toggle(self, direction: str) -> None:
+        nm.toggle(direction)
 
-    def action_toggle(self, up: bool):
-        nm.toggle(up)
-
-def network_app():
+def network_app() -> None:
     app = NetworkApp()
     app.run()
