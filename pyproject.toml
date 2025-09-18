@@ -1,6 +1,6 @@
 [project]
 name = "tui-network"
-version = "0.2.206"
+version = "0.2.2011111111"
 description = "A Python based TUI for managing the wifi on Linux"
 readme = "README.md"
 authors = [

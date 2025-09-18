@@ -1,6 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, DataTable, Input, RichLog
-from textual.containers import Container, VerticalGroup, VerticalScroll, HorizontalGroup
+from textual.containers import Container, VerticalGroup, VerticalScroll, HorizontalGroup, Vertical
 from tui_network.features.network_manager import NetworkManager
 
 nm = NetworkManager()
@@ -77,14 +77,13 @@ class NetworkApp(App):
     ]
 
     def compose(self) -> ComposeResult:
-        yield Container(
-            VerticalGroup(NetworksWidget(can_focus=False), id='networks'),
-            VerticalGroup(StatusWidget(can_focus=False, can_focus_children=False), id='status'),
-            VerticalGroup(ConnectWidget(), id='connect'),
-          #  NetworksWidget(can_focus=False),
-          #  StatusWidget(can_focus=False, can_focus_children=False),
-          #  ConnectWidget(),
-        )
+        with Vertical():
+          #  yield VerticalGroup(NetworksWidget(can_focus=False), id='networks'),
+          #  yield VerticalGroup(StatusWidget(can_focus=False, can_focus_children=False), id='status'),
+          #  yield VerticalGroup(ConnectWidget(), id='connect'),
+            yield StatusWidget(can_focus=False, can_focus_children=False)
+            yield NetworksWidget(can_focus=False)
+            yield ConnectWidget()
         yield Footer()
 
     def action_refresh(self) -> None:
