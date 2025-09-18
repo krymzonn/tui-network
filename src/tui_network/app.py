@@ -70,19 +70,20 @@ class NetworkApp(App):
     CSS_PATH = "static/style.tcss"
 
     BINDINGS = [
+        ("q", "quit()", "Quit"),
         ("r", "refresh()", "Refresh"),
-        ("u", "toggle('off')", "wifi Down"),
-        ("d", "toggle('on')", "wifi Up"),
+        ("d", "toggle('off')", "wifi Down"),
+        ("u", "toggle('on')", "wifi Up"),
     ]
 
     def compose(self) -> ComposeResult:
         yield Container(
-           # VerticalGroup(NetworksWidget(can_focus=False), id='networks'),
-           # VerticalGroup(StatusWidget(can_focus=False, can_focus_children=False), id='status'),
-           # VerticalGroup(ConnectWidget(), id='connect'),
-            NetworksWidget(can_focus=False),
-            StatusWidget(can_focus=False, can_focus_children=False),
-            ConnectWidget(),
+            VerticalGroup(NetworksWidget(can_focus=False), id='networks'),
+            VerticalGroup(StatusWidget(can_focus=False, can_focus_children=False), id='status'),
+            VerticalGroup(ConnectWidget(), id='connect'),
+          #  NetworksWidget(can_focus=False),
+          #  StatusWidget(can_focus=False, can_focus_children=False),
+          #  ConnectWidget(),
         )
         yield Footer()
 

@@ -1,14 +1,14 @@
 [project]
 name = "tui-network"
-version = "0.2.0"
+version = "0.2.206"
 description = "A Python based TUI for managing the wifi on Linux"
 readme = "README.md"
 authors = [
-    { name = "Matteo Ferrini", email = "mimmi.ferrini@gmail.com" }
+    { name = "Matteo Ferrini", email = "mimmi.ferrini@gmail.com" },
+    { name = "Kris Ilowiecki", email = "krymzon@heyorgmail" },
 ]
 requires-python = ">=3.10"
 dependencies = [
-    "fortune-python>=1.1.1",
     "textual>=1.0.0",
 ]
 

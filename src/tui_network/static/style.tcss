@@ -50,21 +50,6 @@ ConnectWidget:focus-within {
     border: heavy $accent;
 }
 
-#fortune {
-    row-span: 1;
-    column-span: 1;
-    height: 100h;
-}
-
-FortuneWidget {
-    padding: 1;
-    border: grey;
-}
-
-FortuneWidget:focus-within {
-    border: heavy $accent;
-}
-
 DataTable {
     margin: 1;
 }
