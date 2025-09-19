@@ -1,61 +1,30 @@
 /*
-Container {
-    layout: grid;
-    grid-size: 2 4;
-    grid-rows: 1fr;
-    grid-columns: 1fr;
-    grid-gutter: 1 3;
-    margin: 1;
-}
-
-#networks {
-    row-span: 4;
-    column-span: 1;
-    height: 100h;
-}
+ *
 */
 
-NetworksWidget {
-    border: grey;
-}
-
-NetworksWidget:focus-within {
-    border: heavy $accent;
-}
-
-#status {
-    row-span: 2;
-    column-span: 1;
-    height: 100h;
-}
-
-StatusWidget {
-    border: grey;
-}
-
-StatusWidget:focus-within {
-    border: heavy $accent;
-}
-
-#connect {
-    row-span: 1;
-    column-span: 1;
-    height: 100h;
-}
-
-ConnectWidget {
+NetworksWidget, StatusWidget, ConnectWidget  {
+    border: $foreground-muted;
     padding: 0;
-    border: grey;
+}
+NetworksWidget, StatusWidget {
+    height: auto;
 }
 
-ConnectWidget:focus-within {
-    border: heavy $accent;
+NetworksWidget:focus-within, StatusWidget:focus-within, ConnectWidget:focus-within {
+    border: $primary;
 }
 
-DataTable {
-    margin: 1;
+DataTable, DataTable:focus-within {
+    margin: 0 1;
+    background: $background;
 }
 
 Input {
+    background: $background;
     width: 50w;
+    height: 1;
+    border: none;
+}
+Input:focus {
+    background: $secondary-darken-3;
 }

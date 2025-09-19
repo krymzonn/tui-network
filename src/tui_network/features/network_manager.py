@@ -6,8 +6,8 @@ def run(command):
 
 class NetworkManager():
 
-    STATUS_HEADER = ['device', 'type', 'state', 'connection']
-    NETWORKS_HEADER = ['ssid', 'bars', 'security']
+    STATUS_HEADER = ['Device', 'Type', 'State', 'Connection']
+    NETWORKS_HEADER = ['SSID', 'Signal', 'Security']
 
     def __init__(self) -> None:
         self.rescan()

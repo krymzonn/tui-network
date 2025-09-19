@@ -1,7 +1,7 @@
 [project]
 name = "tui-network"
-version = "0.2.2011111111"
-description = "A Python based TUI for managing the wifi on Linux"
+version = "0.2.3"
+description = "A Python based TUI for managing the wifi on Omarchy"
 readme = "README.md"
 authors = [
     { name = "Matteo Ferrini", email = "mimmi.ferrini@gmail.com" },

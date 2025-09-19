@@ -11,7 +11,7 @@ class StatusWidget(VerticalScroll):
 
     def compose(self) -> ComposeResult:
         yield DataTable(
-            header_height=2,
+            header_height=1,
             show_cursor=False,
             cursor_type='row'
         )
@@ -31,7 +31,7 @@ class NetworksWidget(VerticalScroll):
 
     def compose(self) -> ComposeResult:
         yield DataTable(
-            header_height=2,
+            header_height=1,
             cursor_type='row'
         )
 
@@ -71,7 +71,7 @@ class NetworkApp(App):
 
     BINDINGS = [
         ("q", "quit()", "Quit"),
-        ("r", "refresh()", "Refresh"),
+        ("r", "refresh()", "Rescan"),
         ("d", "toggle('off')", "wifi Down"),
         ("u", "toggle('on')", "wifi Up"),
     ]
@@ -85,6 +85,11 @@ class NetworkApp(App):
             yield NetworksWidget(can_focus=False)
             yield ConnectWidget()
         yield Footer()
+
+    def on_mount(self) -> None:
+        self.theme = "tokyo-night"
+        self.screen.focus_next()
+        #self.app.query_one('NetworksWidget').focus()
 
     def action_refresh(self) -> None:
         nm.rescan()
